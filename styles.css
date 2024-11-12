@@ -1,0 +1,290 @@
+/* Base styles with retro colors */
+:root {
+    --retro-green: #33ff33;
+    --retro-dark: #001100;
+    --retro-bg: #002200;
+    --scanline-color: rgba(0, 17, 0, 0.2);
+}
+
+body {
+    background: var(--retro-bg);
+    font-family: 'VT323', monospace;
+    color: var(--retro-green);
+    line-height: 1.6;
+    padding-top: 4rem;
+    min-height: 120vh;
+    padding-bottom: 4rem;
+}
+
+/* Retro Background with Scanlines */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        var(--retro-bg) 0px,
+        var(--retro-bg) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    z-index: 0;
+}
+
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        var(--scanline-color) 51%
+    );
+    background-size: 100% 4px;
+    animation: scanlines 10s linear infinite;
+    pointer-events: none;
+}
+
+/* Typography */
+.retro-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2rem;
+    color: var(--retro-green);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    line-height: 1.4;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 0.2s;
+}
+
+.retro-text {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 0.4s;
+}
+
+.highlight-text {
+    color: #fff;
+    background-color: var(--retro-dark);
+    padding: 0 0.5rem;
+    margin: 0 0.25rem;
+}
+
+/* Container Styles */
+.retro-container {
+    border: 2px solid var(--retro-green);
+    background: var(--retro-dark);
+    padding: 2rem;
+    position: relative;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 0.6s;
+}
+
+.retro-container::before {
+    content: 'SYSTEM STATUS';
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background: var(--retro-bg);
+    padding: 0 10px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+}
+
+/* Countdown Styling */
+.countdown-segment {
+    background: var(--retro-dark);
+    border: 2px solid var(--retro-green);
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.countdown-number {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.5rem;
+    color: var(--retro-green);
+    margin-bottom: 0.5rem;
+}
+
+.countdown-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--retro-green);
+    opacity: 0.8;
+}
+
+/* Buttons */
+.retro-button {
+    background: var(--retro-dark);
+    border: 2px solid var(--retro-green);
+    color: var(--retro-green);
+    padding: 1rem;
+    font-size: 1.5rem;
+    transition: all 0.2s ease;
+}
+
+.retro-button:hover {
+    background: var(--retro-green);
+    color: var(--retro-dark);
+}
+
+/* Animations */
+@keyframes scanlines {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100%; }
+}
+
+.blink {
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* Retro Line */
+.retro-line {
+    height: 2px;
+    width: 100px;
+    background: var(--retro-green);
+    margin: 2rem auto;
+    position: relative;
+}
+
+.retro-line::before,
+.retro-line::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: var(--retro-green);
+    top: -2px;
+}
+
+.retro-line::before { left: -3px; }
+.retro-line::after { right: -3px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .retro-title {
+        font-size: 1.5rem;
+    }
+    
+    .retro-text {
+        font-size: 1.2rem;
+    }
+    
+    .countdown-number {
+        font-size: 1.2rem;
+    }
+}
+
+/* Navbar Styles */
+.retro-navbar {
+    background: transparent;
+    border-bottom: none;
+    box-shadow: none;
+}
+
+.retro-nav-button {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    color: var(--retro-green);
+    background: var(--retro-dark);
+    border: 2px solid var(--retro-green);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    text-shadow: 0 0 2px var(--retro-green);
+    margin-left: 1rem;
+}
+
+.retro-nav-button:hover {
+    background: var(--retro-green);
+    color: var(--retro-dark);
+    transform: translateY(2px);
+    box-shadow: 0 0 10px var(--retro-green);
+}
+
+.retro-nav-button:active {
+    transform: translateY(4px);
+}
+
+.retro-nav-button::before {
+    display: none;
+}
+
+/* Add slow blinking animation for brackets */
+.blink-slow {
+    animation: blinkSlow 2s step-end infinite;
+}
+
+@keyframes blinkSlow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Add these countdown specific styles */
+.countdown-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Add smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Add subtle fade effect for content */
+.retro-container, 
+.retro-title, 
+.retro-text {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add different delays for elements */
+.retro-title {
+    animation-delay: 0.2s;
+}
+
+.retro-text {
+    animation-delay: 0.4s;
+}
+
+.retro-container {
+    animation-delay: 0.6s;
+}
+
+footer {
+    animation-delay: 0.8s;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+}

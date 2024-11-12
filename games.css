@@ -1,0 +1,531 @@
+/* Create a new file: games.css */
+.games-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.games-container {
+    background: var(--retro-dark);
+    border: 2px solid var(--retro-green);
+    padding: 1.5rem;
+    width: 90%;
+    max-width: 1200px;
+    min-height: 800px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.games-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    font-family: 'Press Start 2P', cursive;
+    color: var(--retro-green);
+}
+
+.close-button {
+    color: var(--retro-green);
+    border: none;
+    background: none;
+    font-family: 'Press Start 2P', cursive;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.close-button:hover {
+    color: #ff0000;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+    height: auto;
+}
+
+.game-card {
+    border: 2px solid var(--retro-green);
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(51, 255, 51, 0.05);
+}
+
+.game-card:hover {
+    background: var(--retro-green);
+    color: var(--retro-dark);
+    transform: translateY(-2px);
+}
+
+.game-card h3 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.game-card p {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* Game Canvas Styles */
+.game-canvas {
+    width: 800px !important;
+    height: 600px !important;
+    background: #000;
+    display: block;
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.game-container {
+    width: 800px;
+    height: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #000;
+    border: 2px solid var(--retro-green);
+    overflow: hidden;
+    position: relative;
+}
+
+.game-score {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: var(--retro-green);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1rem;
+    z-index: 10;
+}
+
+.game-controls {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--retro-green);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .game-container,
+    .game-canvas {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 4/3;
+    }
+}
+
+/* Add game over screen styles */
+.game-over-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.game-over-text {
+    font-family: 'Press Start 2P', cursive;
+    color: var(--retro-green);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.game-over-score {
+    font-size: 2rem;
+    margin: 1rem 0;
+}
+
+.game-over-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.game-button {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--retro-green);
+    background: transparent;
+    color: var(--retro-green);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.game-button:hover {
+    background: var(--retro-green);
+    color: var(--retro-dark);
+}
+
+/* Add High Score styles */
+.high-scores {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 2rem;
+    border: 2px solid var(--retro-green);
+    margin-top: 2rem;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.high-scores table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.high-scores th,
+.high-scores td {
+    padding: 0.5rem;
+    text-align: center;
+    border: 1px solid rgba(51, 255, 51, 0.3);
+}
+
+.high-scores th {
+    color: var(--retro-green);
+    background: rgba(51, 255, 51, 0.1);
+}
+
+.high-scores tr:nth-child(even) {
+    background: rgba(51, 255, 51, 0.05);
+}
+
+/* High Score Styles */
+.high-scores-table {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1.5rem;
+    border: 2px solid var(--retro-green);
+    margin: 1.5rem 0;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.high-scores-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+}
+
+.high-scores-table th,
+.high-scores-table td {
+    padding: 0.5rem;
+    text-align: center;
+    border: 1px solid rgba(51, 255, 51, 0.3);
+}
+
+.high-scores-table th {
+    color: var(--retro-green);
+    background: rgba(51, 255, 51, 0.1);
+}
+
+.new-highscore {
+    color: #ffff00;
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Style for the name input prompt */
+.name-input {
+    background: var(--retro-dark);
+    border: 2px solid var(--retro-green);
+    color: var(--retro-green);
+    padding: 0.5rem;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    width: 200px;
+}
+
+/* Add Leaderboard Styles */
+.leaderboard-section {
+    margin: 2rem 0;
+    padding: 1rem;
+    border: 2px solid var(--retro-green);
+    background: rgba(51, 255, 51, 0.05);
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.leaderboard-section h3 {
+    font-family: 'Press Start 2P', cursive;
+    color: var(--retro-green);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.game-select {
+    display: block;
+    width: 200px;
+    margin: 0 auto 1rem;
+    padding: 0.5rem;
+    background: var(--retro-dark);
+    border: 2px solid var(--retro-green);
+    color: var(--retro-green);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.game-select:focus {
+    outline: none;
+    box-shadow: 0 0 10px var(--retro-green);
+}
+
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+}
+
+.leaderboard-table thead {
+    position: sticky;
+    top: 0;
+    background: var(--retro-dark);
+    z-index: 1;
+}
+
+.leaderboard-table th {
+    background: rgba(51, 255, 51, 0.1);
+    color: var(--retro-green);
+    padding: 0.75rem;
+    text-align: center;
+    border: 1px solid rgba(51, 255, 51, 0.3);
+}
+
+.leaderboard-table td {
+    padding: 0.75rem;
+    text-align: center;
+    border: 1px solid rgba(51, 255, 51, 0.3);
+}
+
+.leaderboard-table .rank-1 {
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.leaderboard-table .rank-2 {
+    background: rgba(192, 192, 192, 0.1);
+}
+
+.leaderboard-table .rank-3 {
+    background: rgba(205, 127, 50, 0.1);
+}
+
+.leaderboard-content {
+    margin-top: 1rem;
+}
+
+/* Add divider style */
+.retro-divider {
+    width: 100%;
+    height: 2px;
+    background: var(--retro-green);
+    margin: 2rem 0;
+    position: relative;
+    opacity: 0.5;
+}
+
+/* Update container spacing */
+.games-grid {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.leaderboard-section {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+/* Adjust container height */
+.games-container {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* Add custom scrollbar for the leaderboard */
+.leaderboard-section::-webkit-scrollbar {
+    width: 8px;
+}
+
+.leaderboard-section::-webkit-scrollbar-track {
+    background: rgba(51, 255, 51, 0.05);
+    border-radius: 4px;
+}
+
+.leaderboard-section::-webkit-scrollbar-thumb {
+    background: var(--retro-green);
+    border-radius: 4px;
+}
+
+.leaderboard-section::-webkit-scrollbar-thumb:hover {
+    background: #40ff40;
+}
+
+/* Add retro modal styles */
+.retro-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.retro-modal {
+    background: var(--retro-dark);
+    border: 2px solid var(--retro-green);
+    padding: 2rem;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    color: var(--retro-green);
+    max-width: 400px;
+    width: 90%;
+    position: relative;
+    animation: modalAppear 0.3s ease-out;
+}
+
+.retro-modal h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #ffff00;
+    text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+}
+
+.retro-input-group {
+    margin: 2rem 0;
+    text-align: left;
+}
+
+.retro-input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 0.5rem;
+    background: #000;
+    border: 2px solid var(--retro-green);
+    color: var(--retro-green);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1rem;
+    outline: none;
+}
+
+.retro-input:focus {
+    box-shadow: 0 0 10px var(--retro-green);
+}
+
+.retro-modal-button {
+    background: transparent;
+    border: 2px solid var(--retro-green);
+    color: var(--retro-green);
+    padding: 1rem 2rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.retro-modal-button:hover {
+    background: var(--retro-green);
+    color: var(--retro-dark);
+    box-shadow: 0 0 15px var(--retro-green);
+}
+
+@keyframes modalAppear {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+    .games-container {
+        width: 95%;
+        max-width: 100%;
+        padding: 1rem;
+    }
+
+    .game-container {
+        width: 100%;
+        height: auto;
+        max-width: 400px; /* Limit max width on mobile */
+        aspect-ratio: 4/3; /* Maintain aspect ratio */
+        margin-bottom: 200px; /* Space for controls */
+    }
+
+    #gameCanvas {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain;
+    }
+
+    /* Adjust game cards for mobile */
+    .games-grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .game-card {
+        height: 100px;
+        padding: 1rem;
+    }
+
+    /* Adjust score display for mobile */
+    .game-score {
+        font-size: 0.8rem;
+        padding: 0.5rem;
+    }
+
+    /* Adjust controls text for mobile */
+    .game-controls {
+        font-size: 0.7rem;
+        padding: 0.5rem;
+    }
+}

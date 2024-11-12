@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepesh Gupta - Portfolio Coming Soon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="games.css">
+    <link rel="stylesheet" href="mobile-controls.css">
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 overflow-hidden">
+    <!-- Retro Background -->
+    <div class="background">
+        <div class="scanlines"></div>
+    </div>
+    
+    <!-- Updated Navbar with more top spacing -->
+    <nav class="retro-navbar fixed top-6 left-0 w-full p-4 z-20">
+        <div class="container mx-auto flex justify-end gap-4">
+            <button class="retro-nav-button" onclick="destroyScreen()">
+                <span class="blink-slow">[</span> DESTROY <span class="blink-slow">]</span>
+            </button>
+            <button class="retro-nav-button" onclick="openGames()">
+                <span class="blink-slow">[</span> GAMES <span class="blink-slow">]</span>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Main Content with increased top margin -->
+    <div class="container max-w-4xl mx-auto px-4 relative z-10 mt-24">
+        <!-- Header Section -->
+        <header class="text-center mb-16">
+            <h1 class="retro-title mb-6">
+                <span class="blink">>_</span> Hi, I'm Deepesh Gupta
+            </h1>
+            <div class="retro-line"></div>
+            <p class="retro-text max-w-2xl mx-auto">
+                I am a final-year BTech student specializing in 
+                <span class="highlight-text">[machine learning]</span>, 
+                <span class="highlight-text">[deep learning]</span>, and 
+                <span class="highlight-text">[databases]</span>. 
+                Passionate about developing impactful solutions that bridge technology with real-world applications. 
+                Skilled in creating innovative AI projects that enhance user experiences and solve practical challenges. 
+                My portfolio website will go live on January 1st, 2025. Feel free to connect with me below.
+            </p>
+        </header>
+
+        <!-- Update the Countdown Section -->
+        <div class="retro-container mb-16">
+            <div id="countdown" class="grid grid-cols-4 gap-4 max-w-xl mx-auto">
+                <!-- Countdown segments will be inserted by JavaScript -->
+            </div>
+            <p class="text-center mt-6 retro-small-text">
+                LOADING PORTFOLIO... PLEASE WAIT
+            </p>
+        </div>
+
+        <!-- Contact Section -->
+        <footer class="text-center">
+            <h2 class="retro-subtitle mb-6">CONNECT.EXE</h2>
+            <div class="flex justify-center gap-6">
+                <a href="mailto:damndeepesh@icloud.com" 
+                   class="retro-button" 
+                   target="_blank" 
+                   rel="noopener noreferrer">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://linkedin.com/in/damndeepesh" 
+                   class="retro-button" 
+                   target="_blank" 
+                   rel="noopener noreferrer">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/damndeepesh" 
+                   class="retro-button" 
+                   target="_blank" 
+                   rel="noopener noreferrer">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+    <script src="main.js"></script>
+    <script src="destroy.js"></script>
+    <script src="games.js"></script>
+    <script src="highscores.js"></script>
+    <script src="mobile-controls.js"></script>
+    <script>
+        // Initialize mobile controls
+        document.addEventListener('DOMContentLoaded', () => {
+            new MobileControls();
+        });
+    </script>
+</body>
+</html> 
