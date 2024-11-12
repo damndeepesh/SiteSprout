@@ -103,7 +103,7 @@ function openGames() {
         </div>
     `;
     document.body.appendChild(gamesModal);
-    updateLeaderboard(); // Initialize leaderboard
+    updateLeaderboard();
 }
 
 function closeGames() {

@@ -1,28 +1,33 @@
 const HighScoreSystem = {
     saveScore(game, score) {
-        // Create custom modal for name input
-        const modalOverlay = document.createElement('div');
-        modalOverlay.className = 'retro-modal-overlay';
-        modalOverlay.innerHTML = `
-            <div class="retro-modal">
-                <h2>NEW HIGH SCORE!</h2>
-                <p>Score: ${score}</p>
-                <div class="retro-input-group">
-                    <label for="playerName">Enter Your Name:</label>
-                    <input type="text" id="playerName" class="retro-input" maxlength="10" value="Player">
-                </div>
-                <button class="retro-modal-button" onclick="submitHighScore(this)">SUBMIT</button>
-            </div>
-        `;
-        document.body.appendChild(modalOverlay);
+        // First check if it's actually a high score
+        if (!this.checkHighScore(game, score)) {
+            return Promise.resolve(this.getScores(game));
+        }
 
-        // Focus input
-        const input = modalOverlay.querySelector('#playerName');
-        input.select();
-
-        // Return a promise that resolves when the name is submitted
         return new Promise((resolve) => {
-            window.submitHighScore = (button) => {
+            // Create custom modal for name input
+            const modalOverlay = document.createElement('div');
+            modalOverlay.className = 'retro-modal-overlay';
+            modalOverlay.innerHTML = `
+                <div class="retro-modal">
+                    <h2>NEW HIGH SCORE!</h2>
+                    <p>Score: ${score}</p>
+                    <div class="retro-input-group">
+                        <label for="playerName">Enter Your Name:</label>
+                        <input type="text" id="playerName" class="retro-input" maxlength="10" value="Player">
+                    </div>
+                    <button id="submitScoreBtn" class="retro-modal-button">SUBMIT</button>
+                </div>
+            `;
+            document.body.appendChild(modalOverlay);
+
+            // Focus input
+            const input = modalOverlay.querySelector('#playerName');
+            input.select();
+
+            // Add event listeners for both button click and Enter key
+            const submitScore = () => {
                 const playerName = input.value.trim() || 'Anonymous';
                 modalOverlay.remove();
                 
@@ -40,6 +45,17 @@ const HighScoreSystem = {
                 localStorage.setItem(`highscores_${game}`, JSON.stringify(scores));
                 resolve(scores);
             };
+
+            // Add click event listener
+            const submitButton = modalOverlay.querySelector('#submitScoreBtn');
+            submitButton.addEventListener('click', submitScore);
+
+            // Add keyboard event listener
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    submitScore();
+                }
+            });
         });
     },
 

@@ -7,23 +7,21 @@
     bottom: 0;
     background: rgba(0, 0, 0, 0.9);
     z-index: 10000;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
+    flex-direction: column;
 }
 
 .games-container {
-    background: var(--retro-dark);
-    border: 2px solid var(--retro-green);
-    padding: 1.5rem;
+    flex: 1;
     width: 90%;
     max-width: 1200px;
-    min-height: 800px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    margin: auto;
+    margin: 20px auto;
+    padding: 1.5rem;
+    background: var(--retro-dark);
+    border: 2px solid var(--retro-green);
+    overflow-y: auto;
 }
 
 .games-header {
@@ -133,6 +131,9 @@
     z-index: 10;
     text-align: center;
     width: 100%;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 5px;
 }
 
 /* Responsive adjustments */
@@ -278,12 +279,9 @@
 
 /* Add Leaderboard Styles */
 .leaderboard-section {
-    margin: 2rem 0;
+    margin-top: 2rem;
     padding: 1rem;
-    border: 2px solid var(--retro-green);
-    background: rgba(51, 255, 51, 0.05);
-    max-height: 400px;
-    overflow-y: auto;
+    border-top: 2px solid var(--retro-green);
 }
 
 .leaderboard-section h3 {
@@ -527,5 +525,275 @@
     .game-controls {
         font-size: 0.7rem;
         padding: 0.5rem;
+    }
+
+    .games-modal {
+        align-items: flex-start;
+        padding: 0.5rem;
+    }
+
+    .games-container {
+        margin: 1rem auto;
+        padding: 1rem;
+        height: auto;
+        overflow-y: auto;
+    }
+
+    .games-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .leaderboard-section {
+        max-height: 50vh;
+        overflow-y: auto;
+        margin-top: 1rem;
+        padding: 0.5rem;
+    }
+}
+
+/* Update leaderboard styles */
+.leaderboard-section {
+    margin-top: 2rem;
+    padding: 1rem;
+    border-top: 2px solid var(--retro-green);
+}
+
+.high-scores-table {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 1rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 300px;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid var(--retro-green);
+}
+
+/* Mobile specific adjustments */
+@media (max-width: 768px) {
+    .leaderboard-section {
+        margin-top: 1rem;
+        padding: 0.5rem;
+        overflow-x: auto; /* Enable horizontal scroll if needed */
+    }
+
+    .game-select {
+        width: 100%;
+        margin-bottom: 1rem;
+        padding: 8px;
+        background: var(--retro-dark);
+        border: 1px solid var(--retro-green);
+        color: var(--retro-green);
+        font-family: 'Press Start 2P', cursive;
+        font-size: 0.8rem;
+    }
+
+    /* Make table more compact on mobile */
+    table {
+        font-size: 0.8rem;
+    }
+
+    th, td {
+        padding: 6px;
+        white-space: nowrap; /* Prevent text wrapping */
+    }
+
+    /* Add horizontal scroll indicator */
+    .leaderboard-content {
+        position: relative;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+        padding-bottom: 10px; /* Space for scroll bar */
+    }
+
+    /* Style the scrollbar */
+    .leaderboard-content::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .leaderboard-content::-webkit-scrollbar-track {
+        background: rgba(51, 255, 51, 0.1);
+    }
+
+    .leaderboard-content::-webkit-scrollbar-thumb {
+        background: var(--retro-green);
+        border-radius: 2px;
+    }
+
+    /* Adjust column widths for mobile */
+    td:first-child, th:first-child {
+        width: 40px; /* Rank column */
+    }
+
+    td:nth-child(2), th:nth-child(2) {
+        min-width: 80px; /* Name column */
+    }
+
+    td:nth-child(3), th:nth-child(3) {
+        min-width: 60px; /* Score column */
+    }
+
+    td:nth-child(4), th:nth-child(4) {
+        min-width: 80px; /* Date column */
+    }
+}
+
+/* Tablet and Desktop specific adjustments */
+@media (min-width: 769px) {
+    .game-controls {
+        bottom: -40px; /* Move controls below the game canvas */
+        background: transparent;
+    }
+
+    .game-container {
+        margin-bottom: 50px; /* Add space for controls text */
+    }
+}
+
+/* Mobile specific adjustments */
+@media (max-width: 768px) {
+    .game-controls {
+        bottom: 200px; /* Position above mobile controls */
+    }
+}
+
+/* Update Game Controls positioning */
+.game-controls {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--retro-green);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+    pointer-events: none; /* Prevent text from interfering with game */
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    padding: 5px;
+}
+
+/* Tablet and Desktop specific adjustments */
+@media (min-width: 769px) {
+    .game-controls {
+        bottom: -40px; /* Move controls below the game canvas */
+        background: transparent;
+    }
+
+    .game-container {
+        margin-bottom: 50px; /* Add space for controls text */
+    }
+}
+
+/* Mobile specific adjustments */
+@media (max-width: 768px) {
+    .game-controls {
+        bottom: 200px; /* Position above mobile controls */
+    }
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+    .games-modal {
+        padding: 0.5rem;
+    }
+
+    .games-container {
+        width: 95%;
+        padding: 1rem;
+        margin: 0.5rem auto;
+        min-height: auto; /* Allow container to expand with content */
+    }
+
+    .games-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .leaderboard-section {
+        max-height: none; /* Remove max height to allow full scrolling */
+        overflow-y: visible;
+        margin-top: 1rem;
+        padding: 0.5rem;
+    }
+}
+
+/* Mobile specific adjustments */
+@media (max-width: 768px) {
+    .games-modal {
+        padding: 10px;
+    }
+
+    .games-container {
+        margin: 10px auto;
+        padding: 1rem;
+    }
+
+    .games-grid {
+        gap: 1rem;
+    }
+
+    /* Ensure leaderboard is scrollable */
+    .leaderboard-section {
+        max-height: 50vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Mobile specific adjustments */
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 200px; /* Increased space for mobile controls */
+    }
+
+    .games-modal {
+        padding: 10px;
+    }
+
+    .games-container {
+        margin: 10px auto;
+        padding: 1rem;
+        max-height: calc(100vh - 20px); /* Account for padding */
+        overflow-y: auto;
+    }
+
+    .games-grid {
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Ensure leaderboard section is visible */
+    .leaderboard-section {
+        margin-top: 1rem;
+        padding-bottom: 180px; /* Space for mobile controls */
+        overflow-y: auto;
+    }
+
+    /* Ensure contact buttons stay visible */
+    .contact-buttons {
+        position: relative;
+        z-index: 1001;
+        margin-bottom: 180px; /* Space for mobile controls */
+    }
+
+    /* Adjust mobile controls container */
+    .mobile-controls {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 10002; /* Ensure it's above everything */
     }
 }

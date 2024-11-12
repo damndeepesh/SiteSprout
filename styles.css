@@ -12,8 +12,9 @@ body {
     color: var(--retro-green);
     line-height: 1.6;
     padding-top: 4rem;
-    min-height: 120vh;
-    padding-bottom: 4rem;
+    min-height: 100vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Retro Background with Scanlines */
@@ -287,4 +288,83 @@ footer {
     animation-delay: 0.8s;
     opacity: 0;
     animation: fadeIn 1s ease-out forwards;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    body {
+        min-height: 130vh;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .container {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Enable scrolling for main content */
+body {
+    min-height: 100vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scroll for iOS */
+}
+
+/* Update container styles */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Mobile specific adjustments */
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 180px; /* Space for mobile controls */
+    }
+}
+
+/* Base styles for body and html */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto !important; /* Force scroll */
+    -webkit-overflow-scrolling: touch;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-bottom: 180px; /* Space for mobile controls */
+}
+
+/* Main content container */
+.container {
+    flex: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    overflow-y: auto;
+}
+
+/* Footer positioning */
+footer {
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    padding-bottom: 20px;
+}
+
+/* Contact buttons */
+.contact-buttons {
+    position: relative;
+    z-index: 100;
+    margin-bottom: 20px;
 }

@@ -39,30 +39,34 @@ function updateCountdown() {
 // Scroll handling for floating buttons
 function handleScroll() {
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    const navbar = document.querySelector('.retro-navbar');
     
-    if (currentScroll > lastScrollPosition) {
+    // Hide navbar when scrolling down
+    if (currentScroll > lastScrollPosition && currentScroll > 50) { // Added threshold
         navbar.style.transform = 'translateY(-100%)';
         navbar.style.opacity = '0';
+        navbar.style.pointerEvents = 'none'; // Disable interactions while hidden
+    } else {
+        // Show navbar when scrolling up
+        navbar.style.transform = 'translateY(0)';
+        navbar.style.opacity = '1';
+        navbar.style.pointerEvents = 'auto'; // Re-enable interactions
     }
     
     lastScrollPosition = currentScroll;
-    clearTimeout(isScrolling);
-    
-    isScrolling = setTimeout(() => {
-        navbar.style.transform = 'translateY(0)';
-        navbar.style.opacity = '1';
-    }, 150);
 }
 
-function handleScrollUp() {
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-    
-    if (currentScroll < lastScrollPosition) {
-        navbar.style.transform = 'translateY(0)';
-        navbar.style.opacity = '1';
-    }
-    
-    lastScrollPosition = currentScroll;
+// Add debounced scroll handler to improve performance
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
 }
 
 // Initialize everything
@@ -70,10 +74,28 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCountdown();
     setInterval(updateCountdown, 1000);
     
+    const navbar = document.querySelector('.retro-navbar');
     if (navbar) {
         navbar.style.transition = 'transform 0.3s ease-in-out, opacity 0.3s ease-in-out';
+        navbar.style.position = 'fixed';
+        navbar.style.top = '0';
+        navbar.style.width = '100%';
+        navbar.style.zIndex = '1000';
     }
     
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('scroll', handleScrollUp);
+    // Use debounced scroll handler
+    window.addEventListener('scroll', debounce(handleScroll, 10));
+    
+    // Hide navbar when user hasn't scrolled for a while
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            if (window.pageYOffset > 50) { // Only hide if not at top
+                navbar.style.transform = 'translateY(-100%)';
+                navbar.style.opacity = '0';
+                navbar.style.pointerEvents = 'none';
+            }
+        }, 3000); // Hide after 3 seconds of no scrolling
+    });
 }); 

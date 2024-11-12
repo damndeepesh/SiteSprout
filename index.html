@@ -11,8 +11,58 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="games.css">
     <link rel="stylesheet" href="mobile-controls.css">
+    <link rel="stylesheet" href="tablet-controls.css">
+    <style>
+        /* Remove or modify any styles that depend on scroll position */
+        .contact-buttons {
+            /* Change position to fixed to keep it in viewport */
+            position: fixed;
+            /* Adjust bottom position to ensure visibility */
+            bottom: 20px;
+            /* Ensure it stays on top of other content */
+            z-index: 1000;
+            /* If buttons are on the right side */
+            right: 20px;
+            /* If using flex */
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            /* Ensure opacity is set to visible */
+            opacity: 1;
+        }
+
+        /* Make sure the main content doesn't overlap */
+        main {
+            padding-bottom: 100px; /* Add space for contact buttons */
+        }
+
+        body {
+            /* Force minimum height to enable scrolling */
+            min-height: 100vh;
+            /* Ensure proper content flow */
+            margin: 0;
+            padding: 0;
+            overflow-y: auto;
+        }
+
+        /* Exclude navbar from new container rules */
+        nav {
+            /* Preserve original navbar styles */
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        /* Apply min-height to main content only */
+        main.container {
+            /* Start content below navbar */
+            padding-top: 60px; /* Adjust based on your navbar height */
+            min-height: calc(100vh - 60px); /* Subtract navbar height */
+            padding: 20px;
+        }
+    </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4 overflow-hidden">
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
     <!-- Retro Background -->
     <div class="background">
         <div class="scanlines"></div>
@@ -97,6 +147,13 @@
         document.addEventListener('DOMContentLoaded', () => {
             new MobileControls();
         });
+
+        // Remove or modify any scroll event listeners that hide/show contact buttons
+        // If you have code like this, remove it:
+        // window.addEventListener('scroll', function() { ... })
+        
+        // Instead, ensure buttons are visible by default
+        document.querySelector('.contact-buttons').style.opacity = '1';
     </script>
 </body>
 </html> 

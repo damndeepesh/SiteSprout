@@ -1,10 +1,11 @@
 class MobileControls {
     constructor() {
-        this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
-            || window.innerWidth <= 768;
+        this.isMobileOrTablet = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+            || window.innerWidth <= 1024 
+            || (window.innerWidth <= 1024 && window.innerHeight <= 1366);
         this.activeGame = null;
         this.controlsAdded = false;
-        if (this.isMobile) {
+        if (this.isMobileOrTablet) {
             this.init();
         }
     }
@@ -102,7 +103,7 @@ class MobileControls {
     }
 }
 
-// Initialize mobile controls
+// Initialize mobile controls and make it available globally
 document.addEventListener('DOMContentLoaded', () => {
     window.mobileControls = new MobileControls();
 }); 
